@@ -1,5 +1,5 @@
+import { useState, useEffect } from 'react'
 import { getMovieList, searchMovie } from './api/MovieAPI'
-import { useEffect, useState } from 'react'
 
 export default function MovieList() {
   const [popularMovies, setPopularMovies] = useState([])
@@ -14,7 +14,6 @@ export default function MovieList() {
     if (q.length > 3) {
       const query = await searchMovie(q)
       setPopularMovies(query.results)
-      // console.log({ query: query })
     }
   }
 
@@ -22,22 +21,17 @@ export default function MovieList() {
     return popularMovies.map((movie) => {
       return (
         <div
-          className="bg-white lg:w-1/4 rounded-xl text-slate-900 cursor-pointer p-2 mb-3"
+          className="bg-white lg:w-1/4 rounded-xl text-slate-900 font-bold text-xl truncate p-2 mb-5 "
           key={movie.id}
         >
           <img
-            className="w-full rounded-t-xl"
+            className="rounded-t-xl w-full"
             src={`${process.env.REACT_APP_BASEIMGURL}/${movie.poster_path}`}
             alt={movie.title}
           />
-          <h3
-            className="text-xl font-bold bg-yellow-200 py-2 px-4 truncate
-          "
-          >
+          <p className="bg-yellow-300 rounded-b-xl py-2 px-4 truncate">
             {movie.title}
-          </h3>
-          <p>{movie.release_date}</p>
-          <p>{movie.vote_average}</p>
+          </p>
         </div>
       )
     })
