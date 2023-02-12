@@ -1,11 +1,16 @@
-import MovieList from './MovieList'
+import { useState } from 'react'
+import PopularMovies from './component/PopularMovies'
+import DetailMovie from './component/DetailMovie'
 
-function App() {
+export default function App() {
+  const [movieDetail, setMovieDetail] = useState()
   return (
-    <>
-      <MovieList />
-    </>
+    <div>
+      {movieDetail === undefined ? (
+        <PopularMovies movieDetail={(movie) => setMovieDetail(movie)} />
+      ) : (
+        <DetailMovie movieDetail={movieDetail} />
+      )}
+    </div>
   )
 }
-
-export default App
