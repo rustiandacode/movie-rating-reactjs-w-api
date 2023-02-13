@@ -1,12 +1,15 @@
 import { useState, useEffect } from 'react'
 import { getMovieList, searchMovie, getGenres } from '../api/MovieAPI'
+import { TbPlayerTrackPrev, TbPlayerTrackNext } from 'react-icons/tb'
 
 export default function PopularMovies(props) {
   const [popularMovies, setPopularMovies] = useState([])
   const [genresMovie, setGenresMovie] = useState([])
+  const [startPage, setStartPage] = useState(1)
+  const [endPage, setEndPage] = useState(9)
   const pageNumbers = []
 
-  for (let i = 1; i < 11; i++) {
+  for (let i = startPage; i < endPage; i++) {
     pageNumbers.push(i)
   }
 
@@ -35,6 +38,12 @@ export default function PopularMovies(props) {
     }
   }
 
+  const handlePaginationMinus = () => {
+    if ((startPage !== 1) & (endPage !== 8)) {
+      setEndPage(endPage - 8)
+      setStartPage(startPage - 8)
+    }
+  }
   return (
     <div className="container lg:p-5 mx-auto text-center">
       {/* start search bar */}
@@ -77,23 +86,35 @@ export default function PopularMovies(props) {
       {/* end popular movie content */}
 
       {/* start navigation movie */}
-      <nav className="py-20">
-        <ul className="flex bg-teal-700 w-fit mx-auto">
+      <nav className="py-20 flex md:px-0 px-6 lg:w-1/3 mx-auto gap-3">
+        <div
+          className="bg-yellow-300 text-slate-900 flex items-center justify-center w-8 border-[1px] border-slate-900 cursor-pointer "
+          onClick={() => handlePaginationMinus()}
+        >
+          <TbPlayerTrackPrev />
+        </div>
+        <ul className="flex w-fit mx-auto">
           {pageNumbers.map((num) => (
             <li
               key={num}
               className="mx-auto border-[1px] border-slate-900"
               onClick={() => thisPage(num)}
             >
-              <a
-                className=" text-slate-900 font-semibold bg-yellow-300 block w-8"
-                href="!#"
-              >
+              <button className="text-slate-900 bg-yellow-300 block w-8 cursor-pointer">
                 {num}
-              </a>
+              </button>
             </li>
           ))}
         </ul>
+        <div
+          className="bg-yellow-300 text-slate-900 flex items-center justify-center w-8 border-[1px] border-slate-900 cursor-pointer"
+          onClick={() => {
+            setEndPage(endPage + 8)
+            setStartPage(startPage + 8)
+          }}
+        >
+          <TbPlayerTrackNext />
+        </div>
       </nav>
       {/* end navigation movie */}
     </div>
