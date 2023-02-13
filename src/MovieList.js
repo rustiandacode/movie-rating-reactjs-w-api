@@ -20,7 +20,6 @@ export default function App() {
 
   const handleMovieDetail = (movie) => {
     setMovieDetail(movie)
-    console.log(movieDetail)
   }
 
   const PopularMoviesList = () => {

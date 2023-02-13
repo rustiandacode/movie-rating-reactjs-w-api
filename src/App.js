@@ -4,16 +4,16 @@ import DetailMovie from './component/DetailMovie'
 
 export default function App() {
   const [movieDetail, setMovieDetail] = useState()
-  const [genres, setGenres] = useState()
+  const [genreDetail, setGenreDetail] = useState()
   return (
     <div>
       {movieDetail === undefined ? (
         <PopularMovies
           movieDetail={(movie) => setMovieDetail(movie)}
-          movieGenres={(genre) => setGenres(genre)}
+          genreDetail={(genres) => setGenreDetail(genres)}
         />
       ) : (
-        <DetailMovie movieDetail={movieDetail} movieGenres={genres} />
+        <DetailMovie movieDetail={movieDetail} genreDetail={genreDetail} />
       )}
     </div>
   )
