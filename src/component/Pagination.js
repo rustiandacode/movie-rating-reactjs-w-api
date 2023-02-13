@@ -14,10 +14,7 @@ export default function Pagination(props) {
             className="mx-auto border-[1px] border-slate-900"
             onClick={() => props.sendPages(num)}
           >
-            <a
-              className=" text-slate-900 font-semibold bg-yellow-300 block w-8"
-              href="!#"
-            >
+            <a className=" text-slate-900 font-semibold bg-yellow-300 block w-8">
               {num}
             </a>
           </li>
